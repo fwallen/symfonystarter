@@ -6,6 +6,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+    ports:
+      - "${MYSQL_EXTERNAL_PORT}:3306"
 
   php:
     build:
