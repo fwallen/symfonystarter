@@ -7,34 +7,110 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
               integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+              crossorigin="anonymous">
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-light bg-light" style="height: 100px;">
-    <a class="navbar-brand" href="#">
-        <p class="pl-2 d-inline font-weight-bold" style="color: #444;">Starter</p>
-    </a>
-    <div class="d-flex">
-        {% if not app.user %}
-            <a href="{{ path('app_register') }}">
-                <button class="btn btn-dark">Sign up</button>
-            </a>&nbsp;
-            <a href="{{ path('app_login') }}">
-                <button class="btn btn-info">Sign in</button>
-            </a>
-        {% endif %}
-        {% if app.user %}
-            <a href="{{ path('app_logout') }}">
-                <button class="btn btn-info">Log out</button>
-            </a>
-        {% endif %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <ul class="navbar-nav">
+            {% if not app.user %}
+                <li class="nav-item">
+                    <a href="{{ path('app_register') }}">
+                        <button class="btn btn-dark">Sign&nbsp;up</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('app_login') }}">
+                        <button class="btn btn-info">Sign&nbsp;in</button>
+                    </a>
+                </li>
+            {% endif %}
+            {% if app.user %}
+                <li class="nav-item dropdown mr-5">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ app.user.username }}
+                    </a>
+                    <ul class="dropdown-menu mr-5" aria-labelledby="navbarDropdownUserMenuLink">
+                        <li><a class="dropdown-item" href="#">Another action with a long label</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+        </ul>
     </div>
 </nav>
+
+{# <nav class="navbar navbar-light bg-light" style="height: 100px;"> #}
+{# <a class="navbar-brand" href="#"> #}
+{# <p class="pl-2 d-inline font-weight-bold" style="color: #444;">Starter</p> #}
+{# </a> #}
+{# <div class="d-flex"> #}
+{# {% if not app.user %} #}
+{# <a href="{{ path('app_register') }}"> #}
+{# <button class="btn btn-dark">Sign up</button> #}
+{# </a>&nbsp; #}
+{# <a href="{{ path('app_login') }}"> #}
+{# <button class="btn btn-info">Sign in</button> #}
+{# </a> #}
+{# {% endif %} #}
+{# {% if app.user %} #}
+{# <ul class="navbar-nav"> #}
+{# <li class="nav-item dropdown"> #}
+{# <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> #}
+{# {{ app.user.username }} #}
+{# </a> #}
+{# <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> #}
+{# <li><a class="dropdown-item" href="#">Another action</a></li> #}
+{# <li><a class="dropdown-item" href="{{  path('app_logout') }}">Logout</a></li> #}
+{# </ul> #}
+{# </li> #}
+{# </ul> #}
+{# {% endif %} #}
+{# </div> #}
+{# </nav> #}
 
 {% block body %}{% endblock %}
 
 {% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>

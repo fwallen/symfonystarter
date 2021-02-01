@@ -9,6 +9,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
     ports:
       - "${MYSQL_EXTERNAL_PORT}:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
 
   php:
     build:
@@ -31,3 +33,6 @@ services:
       - '${NGINX_PORT}:80'
     depends_on:
       - php
+volumes:
+  dbdata:
+    driver: "local"
