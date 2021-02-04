@@ -22,7 +22,13 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .copyFiles({
-        from: '@font-awesome/fonts'
+        from: 'node_modules/@fortawesome/fontawesome-free/sprites'
+    })
+    .copyFiles({
+        from: 'node_modules/@fortawesome/fontawesome-free/svgs'
+    })
+    .copyFiles({
+        from: 'node_modules/@fortawesome/fontawesome-free/webfonts'
     })
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
