@@ -6,6 +6,10 @@
  */
 
 import 'bulma/bulma.sass';
+import 'bulma-pro/bulma.sass';
+
+import './styles/_variables.scss';
+import 'font-awesome/scss/font-awesome.scss';
 
 // any CSS you import will output into a single css file (app.css in this case)
 // import './styles/app.css';
