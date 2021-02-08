@@ -5,10 +5,16 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
+import 'bulma/css/bulma.css';
+import 'bulma-pro/css/bulma.css';
+
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
-// start the Stimulus application
+// import './styles/_variables.scss';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all';
+
 import './bootstrap';
 
 import $ from 'jquery';

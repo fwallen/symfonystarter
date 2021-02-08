@@ -4,37 +4,83 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-              integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-light bg-light" style="height: 100px;">
-    <a class="navbar-brand" href="#">
-        <p class="pl-2 d-inline font-weight-bold" style="color: #444;">Starter</p>
-    </a>
-    <div class="d-flex">
-        {% if not app.user %}
-            <a href="{{ path('app_register') }}">
-                <button class="btn btn-dark">Sign up</button>
-            </a>&nbsp;
-            <a href="{{ path('app_login') }}">
-                <button class="btn btn-info">Sign in</button>
+
+<nav class="navbar is-dark">
+    <div class="navbar-brand"><a href="/" class="navbar-item router-link-active">Starter</a>
+        <div data-target="navbarExampleTransparentExample" class="navbar-burger burger"><span></span> <span></span>
+            <span></span></div>
+    </div>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a href="https://bulma.io/" class="navbar-item">
+                Home
             </a>
-        {% endif %}
-        {% if app.user %}
-            <a href="{{ path('app_logout') }}">
-                <button class="btn btn-info">Log out</button>
-            </a>
-        {% endif %}
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a href="/documentation/overview/start/"
+                   class="navbar-link">
+                    Docs
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a href="/documentation/overview/start/" class="navbar-item">
+                        Overview
+                    </a> <a href="https://bulma.io/documentation/modifiers/syntax/" class="navbar-item">
+                        Modifiers
+                    </a> <a href="https://bulma.io/documentation/columns/basics/" class="navbar-item">
+                        Columns
+                    </a> <a href="https://bulma.io/documentation/layout/container/" class="navbar-item">
+                        Layout
+                    </a> <a href="https://bulma.io/documentation/form/general/" class="navbar-item">
+                        Form
+                    </a>
+                    <hr class="navbar-divider">
+                    <a href="https://bulma.io/documentation/elements/box/" class="navbar-item">
+                        Elements
+                    </a> <a href="https://bulma.io/documentation/components/breadcrumb/" class="navbar-item is-active">
+                        Components
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+            {% if app.user %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        {{ app.user.username }}
+                    </a>
+
+                    <div class="navbar-dropdown is-right">
+                        <a class="navbar-item">
+                            Account
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ path('app_logout') }}">
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{{ path('app_register') }}" class="navbar-item">
+                    Register
+                </a>
+                <a href="{{ path('app_login') }}" class="navbar-item">Log In</a>
+            {% endif %}
+        </div>
     </div>
 </nav>
 
-{% block body %}{% endblock %}
+<section class="section">
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+</section>
+
 
 {% block javascripts %}
+
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
