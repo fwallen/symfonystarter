@@ -46,20 +46,28 @@
             </div>
         </div>
         <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="field is-grouped"><p class="control"><a data-social-network="Twitter"
-                                                                    data-social-action="tweet"
-                                                                    data-social-target="http://localhost:4000"
-                                                                    target="_blank"
-                                                                    href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms"
-                                                                    class="bd-tw-button button is-light"><span
-                                    class="icon"><i class="fab fa-twitter"></i></span> <span>
-                    Tweet
-                  </span></a></p>
-                    <p class="control"><a href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip"
-                                          class="button is-light"><span class="icon"><i
-                                        class="fas fa-download"></i></span> <span>Download</span></a></p></div>
-            </div>
+            {% if app.user %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        {{ app.user.username }}
+                    </a>
+
+                    <div class="navbar-dropdown is-right">
+                        <a class="navbar-item">
+                            Account
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ path('app_logout') }}">
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{{ path('app_register') }}" class="navbar-item">
+                    Register
+                </a>
+                <a href="{{ path('app_login') }}" class="navbar-item">Log In</a>
+            {% endif %}
         </div>
     </div>
 </nav>

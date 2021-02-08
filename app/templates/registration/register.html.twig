@@ -4,19 +4,88 @@
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        <div class="notification is-danger">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1 class="title is-2">Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <form method="post" name="registration_form">
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <input type="hidden" id="registration_form__token" name="registration_form[_token]"
+               value="{{ csrf_token('registration') }}">
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Email</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded">
+                        <input type="email" value="{{ registrationForm.vars.value.email }}"
+                               class="input{{ registrationForm.email.vars.errors|length > 0 ? ' is-danger' : null }}"
+                               name="registration_form[email]"
+                               id="registration_form_email"
+                               placeholder="Email" required autofocus>
+                    </p>
+                    {% if registrationForm.email.vars.errors|length > 0 %}
+                        <p class="help is-danger">{{ registrationForm.email.vars.errors.0.message }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Username</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded">
+                        <input type="text" value="{{ registrationForm.vars.value.username }}"
+                               class="input{{ registrationForm.username.vars.errors|length > 0 ? ' is-danger' : null }}"
+                               name="registration_form[username]"
+                               id="registration_form_username"
+                               placeholder="Username" required autofocus>
+                    </p>{% if registrationForm.username.vars.errors|length > 0 %}
+                    <p class="help is-danger">{{ registrationForm.username.vars.errors.0.message }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Password</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded">
+                        <input type="password" class="input{{ registrationForm.plainPassword.vars.errors|length > 0 ? ' is-danger' : null }}" name="registration_form[plainPassword]"
+                               id="registration_form_plainPassword"
+                               placeholder="Password" required autofocus>
+                    </p>
+                    </p>{% if registrationForm.plainPassword.vars.errors|length > 0 %}
+                    <p class="help is-danger">{{ registrationForm.plainPassword.vars.errors.0.message }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <p class="control">
+                <button class="button is-success" type="submit">Register</button>
+            </p>
+        </div>
+
+        {# {{ form_end(registrationForm) }} #}
+        {# {{ form_start(registrationForm) }} #}
+        {# {{ form_row(registrationForm.email) }} #}
+        {# {{ form_row(registrationForm.username) }} #}
+        {# {{ form_row(registrationForm.plainPassword, { #}
+        {# label: 'Password' #}
+        {# }) }} #}
+        {# <button class="button is-success" type="submit">Register</button> #}
+
+
+    </form>
 {% endblock %}
